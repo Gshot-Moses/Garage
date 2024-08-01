@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:garage/config/app_theme.dart';
+import 'package:garage/features/signin/sign_in_screen.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -11,11 +13,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Garage Scaffolding'),
+      theme: AppTheme.light().themeData,
+      home: SignInScreen(),
     );
   }
 }
