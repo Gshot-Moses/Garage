@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garage/config/app_theme.dart';
-import 'package:garage/features/signin/sign_in_screen.dart';
+import 'package:garage/features/signin/ui/sign_in_screen.dart';
 import 'package:get/get.dart';
 
 void main() {

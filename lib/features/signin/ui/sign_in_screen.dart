@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:garage/features/signin/sign_in_controller.dart';
+import 'package:garage/features/signin/ui/sign_in_controller.dart';
 import 'package:garage/config/app_size.dart';
 import 'package:garage/config/app_color.dart';
 import 'package:garage/config/app_image.dart';
