@@ -8,12 +8,12 @@ import 'package:garage/config/app_image.dart';
 import 'package:garage/config/app_string.dart';
 import 'package:garage/components/custom_text_field.dart';
 import 'package:garage/components/custom_button.dart';
+import 'package:garage/features/signup/sign_up_screen.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({
     super.key,
   });
-
 
   final SignInController signInController = Get.put(SignInController());
 
@@ -21,47 +21,45 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Theme.of(context).primaryColor,
-        body: Form(
-          key: loginFormKey,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                bgImage(context),
-                Padding(
-                  padding: EdgeInsets.only(
-                    left: AppSize.width20,
-                    right: AppSize.width20,
-                    top: Get.height / 19,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      signInText(context),
-                      SizedBox(height: Get.height / 23),
-                      emailField(),
-                      SizedBox(height: Get.height / 43),
-                      passwordField(),
-                      SizedBox(height: Get.height / 22),
-                      signInButton(context),
-                      SizedBox(height: Get.height / 43),
-                      // onLoginWithText(context),
-                      SizedBox(height: Get.height / 43),
-                      // googleFbLogin(context),
-                      SizedBox(height: Get.height / 22),
-                      notHavingAccountText(context),
-                      SizedBox(height: Get.height / 30),
-                    ],
-                  ),
+    return SafeArea(child: Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
+      body: Form(
+        key: loginFormKey,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              bgImage(context),
+              Padding(
+                padding: EdgeInsets.only(
+                  left: AppSize.width20,
+                  right: AppSize.width20,
+                  top: Get.height / 19,
                 ),
-              ],
-            ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    signInText(context),
+                    SizedBox(height: Get.height / 23),
+                    emailField(),
+                    SizedBox(height: Get.height / 43),
+                    passwordField(),
+                    SizedBox(height: Get.height / 22),
+                    signInButton(context),
+                    SizedBox(height: Get.height / 43),
+                    // onLoginWithText(context),
+                    SizedBox(height: Get.height / 43),
+                    // googleFbLogin(context),
+                    SizedBox(height: Get.height / 22),
+                    notHavingAccountText(context),
+                    SizedBox(height: Get.height / 30),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
-      )
-    );
+      ),
+    ));
   }
 
   Widget bgImage(BuildContext context) {
@@ -157,7 +155,7 @@ class SignInScreen extends StatelessWidget {
     return Column(
       children: [
         Obx(
-              () => CustomTextField(
+          () => CustomTextField(
             controller: signInController.passwordController,
             hintText: AppString.passwordHintText,
             obscureText: !signInController.isPasswordVisible.value,
@@ -171,7 +169,7 @@ class SignInScreen extends StatelessWidget {
             //fontFamily: FontFamily.mulishMedium,
             fontWeight: FontWeight.w500,
             onTogglePasswordVisibility:
-            signInController.togglePasswordVisibility,
+                signInController.togglePasswordVisibility,
             validator: (value) {
               if (value!.isEmpty) {
                 return AppString.pleaseEnterPassword;
@@ -217,18 +215,9 @@ class SignInScreen extends StatelessWidget {
 
   Widget signInButton(context) {
     return Obx(
-          () => CustomButton(
+      () => CustomButton(
           onTap: () async {
             if (loginFormKey.currentState!.validate()) {
-              // await StorageController.instance.setLogIn(true);
-              // salonScreenController.getUserinfo();
-              // status == "false"
-              //     ? Navigator.pop(context)
-              //     : Get.to(const OtpScreen(
-              //   status: "login",
-              // ))?.then(
-              //         (value) => FocusManager.instance.primaryFocus?.unfocus());
-
               Future.delayed(const Duration(milliseconds: 500), () {
                 signInController.emailController.clear();
                 signInController.passwordController.clear();
@@ -356,20 +345,20 @@ class SignInScreen extends StatelessWidget {
               color: Theme.of(context).unselectedWidgetColor),
         ),
         const SizedBox(width: AppSize.width1),
-        // GestureDetector(
-        //   onTap: () {
-        //     Get.off(SignUpScreen(status: status))?.then(
-        //             (value) => FocusManager.instance.primaryFocus?.unfocus());
-        //   },
-        //   child: const Text(
-        //     AppString.signUp,
-        //     style: TextStyle(
-        //         fontSize: AppSize.height14,
-        //         fontFamily: FontFamily.mulishBold,
-        //         fontWeight: FontWeight.w700,
-        //         color: AppColor.primaryColors),
-        //   ),
-        // ),
+        GestureDetector(
+          onTap: () {
+            Get.off(SignUpScreen())?.then(
+                (value) => FocusManager.instance.primaryFocus?.unfocus());
+          },
+          child: const Text(
+            AppString.signUp,
+            style: TextStyle(
+                fontSize: AppSize.height14,
+                // fontFamily: FontFamily.mulishBold,
+                fontWeight: FontWeight.w700,
+                color: AppColor.primaryColors),
+          ),
+        ),
       ],
     );
   }

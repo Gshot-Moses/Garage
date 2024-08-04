@@ -10,6 +10,7 @@ class AppColor {
   static const  onBoardingTextColor= Color(0xFF67666F);
   static const whiteColor = Color(0xFFFFFFFF);
   static const  placeholderColor= Color(0xFF504099);
+  static const primaryColors = Color(0xFF504099);
   static const primaryColorLightMode = Color(0xFF504099);
   static const primaryColorDarkMode = Color(0xFF504099);
   static const  unSelectedStarColor = Color(0xFFC9C9C9);
