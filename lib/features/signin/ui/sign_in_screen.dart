@@ -8,7 +8,7 @@ import 'package:garage/config/app_image.dart';
 import 'package:garage/config/app_string.dart';
 import 'package:garage/components/custom_text_field.dart';
 import 'package:garage/components/custom_button.dart';
-import 'package:garage/features/signup/sign_up_screen.dart';
+import 'package:garage/features/signup/ui/sign_up_screen.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({

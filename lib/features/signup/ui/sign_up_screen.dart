@@ -1,8 +1,8 @@
 import 'package:cupertino_will_pop_scope/cupertino_will_pop_scope.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:garage/features/signin/sign_in_screen.dart';
-import 'package:garage/features/signup/sign_up_controller.dart';
+import 'package:garage/features/signin/ui/sign_in_screen.dart';
+import 'package:garage/features/signup/ui/sign_up_controller.dart';
 import 'package:get/get.dart';
 import 'package:garage/config/app_color.dart';
 import 'package:garage/config/app_image.dart';
