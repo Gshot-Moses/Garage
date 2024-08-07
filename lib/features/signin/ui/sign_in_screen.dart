@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:garage/features/home/bottom_navigation_screen.dart';
 import 'package:get/get.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:garage/features/signin/ui/sign_in_controller.dart';
@@ -222,6 +223,7 @@ class SignInScreen extends StatelessWidget {
                 signInController.emailController.clear();
                 signInController.passwordController.clear();
               });
+              Get.off(const BottomNavigationScreen());
             }
           },
           text: AppString.signIn,
