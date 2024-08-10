@@ -47,9 +47,9 @@ class SignInScreen extends StatelessWidget {
                     SizedBox(height: Get.height / 22),
                     signInButton(context),
                     SizedBox(height: Get.height / 43),
-                    // onLoginWithText(context),
+                    onLoginWithText(context),
                     SizedBox(height: Get.height / 43),
-                    // googleFbLogin(context),
+                    googleFbLogin(context),
                     SizedBox(height: Get.height / 22),
                     notHavingAccountText(context),
                     SizedBox(height: Get.height / 30),
@@ -175,6 +175,7 @@ class SignInScreen extends StatelessWidget {
               if (value!.isEmpty) {
                 return AppString.pleaseEnterPassword;
               } else {
+                signInController.isValid.value = true;
                 return null;
               }
             },
@@ -214,6 +215,97 @@ class SignInScreen extends StatelessWidget {
     );
   }
 
+  Widget onLoginWithText(context) {
+    return Align(
+      alignment: Alignment.center,
+      child: Text(
+        AppString.orLogInWith,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+            fontSize: AppSize.height16,
+            //fontFamily: FontFamily.mulishMedium,
+            fontWeight: FontWeight.w600,
+            color: Theme.of(context).textTheme.titleMedium?.color),
+      ),
+    );
+  }
+
+  Widget googleFbLogin(context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.symmetric(
+              vertical: AppSize.height18,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(AppSize.height12),
+              border: Border.all(
+                color: Theme.of(context).dividerColor,
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  AppImage.googleLogo,
+                  height: AppSize.height20,
+                ),
+                const SizedBox(width: AppSize.width6),
+                Text(
+                  AppString.google,
+                  style: TextStyle(
+                    // fontFamily: FontFamily.mulishMedium,
+                    color: Theme.of(context).appBarTheme.titleTextStyle?.color,
+                    fontWeight: FontWeight.w500,
+                    fontSize: AppSize.height15,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(width: AppSize.height20),
+        Expanded(
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              vertical: AppSize.height18,
+            ),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(AppSize.height12),
+              border: Border.all(
+                color: Theme.of(context).dividerColor,
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  AppImage.googleLogo,
+                  height: AppSize.height22,
+                  color: Theme.of(context).appBarTheme.titleTextStyle?.color,
+                ),
+                const SizedBox(width: AppSize.width6),
+                Text(
+                  AppString.google,
+                  style: TextStyle(
+                    //fontFamily: FontFamily.mulishMedium,
+                    color: Theme.of(context).appBarTheme.titleTextStyle?.color,
+                    fontWeight: FontWeight.w600,
+                    fontSize: AppSize.height15,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget signInButton(context) {
     return Obx(
       () => CustomButton(
@@ -241,97 +333,6 @@ class SignInScreen extends StatelessWidget {
           textColor: AppColor.whiteColor),
     );
   }
-
-  // Widget onLoginWithText(context) {
-  //   return Align(
-  //     alignment: Alignment.center,
-  //     child: Text(
-  //       AppString.orLogInWith,
-  //       textAlign: TextAlign.center,
-  //       style: TextStyle(
-  //           fontSize: AppSize.height16,
-  //           fontFamily: FontFamily.mulishMedium,
-  //           fontWeight: FontWeight.w600,
-  //           color: Theme.of(context).textTheme.titleMedium?.color),
-  //     ),
-  //   );
-  // }
-
-  // Widget googleFbLogin(context) {
-  //   return Row(
-  //     mainAxisAlignment: MainAxisAlignment.start,
-  //     children: [
-  //       Expanded(
-  //         child: Container(
-  //           alignment: Alignment.center,
-  //           padding: const EdgeInsets.symmetric(
-  //             vertical: AppSize.height18,
-  //           ),
-  //           decoration: BoxDecoration(
-  //             borderRadius: BorderRadius.circular(AppSize.height12),
-  //             border: Border.all(
-  //               color: Theme.of(context).dividerColor,
-  //             ),
-  //           ),
-  //           child: Row(
-  //             mainAxisAlignment: MainAxisAlignment.center,
-  //             children: [
-  //               Image.asset(
-  //                 AppImage.googleLogo,
-  //                 height: AppSize.height20,
-  //               ),
-  //               const SizedBox(width: AppSize.width6),
-  //               Text(
-  //                 AppString.google,
-  //                 style: TextStyle(
-  //                   fontFamily: FontFamily.mulishMedium,
-  //                   color: Theme.of(context).appBarTheme.titleTextStyle?.color,
-  //                   fontWeight: FontWeight.w500,
-  //                   fontSize: AppSize.height15,
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //       ),
-  //       const SizedBox(width: AppSize.height20),
-  //       Expanded(
-  //         child: Container(
-  //           padding: const EdgeInsets.symmetric(
-  //             vertical: AppSize.height18,
-  //           ),
-  //           alignment: Alignment.center,
-  //           decoration: BoxDecoration(
-  //             borderRadius: BorderRadius.circular(AppSize.height12),
-  //             border: Border.all(
-  //               color: Theme.of(context).dividerColor,
-  //             ),
-  //           ),
-  //           child: Row(
-  //             mainAxisAlignment: MainAxisAlignment.center,
-  //             children: [
-  //               Image.asset(
-  //                 AppImage.appleLogo,
-  //                 height: AppSize.height22,
-  //                 color: Theme.of(context).appBarTheme.titleTextStyle?.color,
-  //               ),
-  //               const SizedBox(width: AppSize.width6),
-  //               Text(
-  //                 AppString.apple,
-  //                 style: TextStyle(
-  //                   fontFamily: FontFamily.mulishMedium,
-  //                   color: Theme.of(context).appBarTheme.titleTextStyle?.color,
-  //                   fontWeight: FontWeight.w600,
-  //                   fontSize: AppSize.height15,
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
 
   Widget notHavingAccountText(context) {
     return Row(

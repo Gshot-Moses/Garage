@@ -8,7 +8,6 @@ import 'package:garage/config/app_string.dart';
 import 'bottom_navigation_controller.dart';
 
 class BottomNavigationScreen extends StatefulWidget {
-
   const BottomNavigationScreen({super.key});
 
   @override
@@ -16,8 +15,8 @@ class BottomNavigationScreen extends StatefulWidget {
 }
 
 class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
-
-  BottomNavigationController homeController = Get.put(BottomNavigationController());
+  BottomNavigationController homeController =
+      Get.put(BottomNavigationController());
   PageController pageController = PageController();
   int currentIndex = 0;
 
@@ -34,13 +33,13 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       body: PageView(
-          controller: pageController,
-          onPageChanged: (index) {
-            setState(() {
-              currentIndex = index;
-            });
-          },
-          children: homeController.pageList,
+        controller: pageController,
+        onPageChanged: (index) {
+          setState(() {
+            currentIndex = index;
+          });
+        },
+        children: homeController.pageList,
       ),
       bottomNavigationBar: buildCustomBottomNavigationBar(),
     );
@@ -96,12 +95,12 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
           //   },
           // ),
           buildNavItem(
-            currentIndex == 3,
+            currentIndex == 2,
             AppIcons.profileFillIcon,
             AppIcons.profileIcon,
             AppString.profile,
             onTap: () {
-              navigateToPage(3);
+              navigateToPage(2);
             },
           ),
         ],
@@ -110,86 +109,78 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   }
 
   Widget buildNavItem(
-      bool isSelected,
-      String selectedIcon,
-      String unselectedIcon,
-      String label, {
-        required VoidCallback onTap,
-      }) {
+    bool isSelected,
+    String selectedIcon,
+    String unselectedIcon,
+    String label, {
+    required VoidCallback onTap,
+  }) {
     return GestureDetector(
-        onTap: onTap,
-        child: Obx(
-              () => Padding(
-            padding: EdgeInsets.only(
-                left: isSelected
-                    ? Get.width / 50
-                    : 0,
-                right: isSelected
-                    ? Get.width / 50
-                    : 0),
-            child: Container(
-              height: isSelected ? Get.width / 7.7 : Get.width / 6,
-              width: isSelected ? Get.width / 2.3 : Get.width / 7.3,
-              decoration: isSelected
-                  ? BoxDecoration(
-                color: isSelected
-                    ? Theme.of(context).appBarTheme.titleTextStyle?.color
-                    : AppColor.loginBgImageColor,
-                borderRadius: BorderRadius.circular(40),
-              )
-                  : null,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                    child: isSelected
-                        ? Image.asset(
-                      isSelected ? selectedIcon : unselectedIcon,
-                      color: isSelected
-                          ? Theme.of(context)
-                          .colorScheme
-                          .tertiaryContainer
-                          : AppColor.secondaryColor,
-                      height: AppSize.height22,
-                      width: AppSize.width22,
-                    )
-                        : Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Theme.of(context)
-                            .colorScheme
-                            .secondaryContainer,
-                      ),
-                      child: Center(
-                        child: Image.asset(
-                          isSelected ? selectedIcon : unselectedIcon,
-                          width: AppSize.height22,
-                          height: AppSize.width22,
-                          color: Theme.of(context)
-                              .appBarTheme
-                              .titleTextStyle
-                              ?.color,
+      onTap: onTap,
+      child: Padding(
+        padding: EdgeInsets.only(
+            left: isSelected ? Get.width / 50 : 0,
+            right: isSelected ? Get.width / 50 : 0),
+        child: Container(
+          height: isSelected ? Get.width / 7.7 : Get.width / 6,
+          width: isSelected ? Get.width / 2.3 : Get.width / 7.3,
+          decoration: isSelected
+              ? BoxDecoration(
+                  color: isSelected
+                      ? Theme.of(context).appBarTheme.titleTextStyle?.color
+                      : AppColor.loginBgImageColor,
+                  borderRadius: BorderRadius.circular(40),
+                )
+              : null,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Flexible(
+                child: isSelected
+                    ? Image.asset(
+                        isSelected ? selectedIcon : unselectedIcon,
+                        color: isSelected
+                            ? Theme.of(context).colorScheme.tertiaryContainer
+                            : AppColor.secondaryColor,
+                        height: AppSize.height22,
+                        width: AppSize.width22,
+                      )
+                    : Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color:
+                              Theme.of(context).colorScheme.secondaryContainer,
+                        ),
+                        child: Center(
+                          child: Image.asset(
+                            isSelected ? selectedIcon : unselectedIcon,
+                            width: AppSize.height22,
+                            height: AppSize.width22,
+                            color: Theme.of(context)
+                                .appBarTheme
+                                .titleTextStyle
+                                ?.color,
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                  const SizedBox(width: AppSize.width6),
-                  if (isSelected)
-                    Text(
-                      label,
-                      style: TextStyle(
-                        //fontFamily: FontFamily.mulishSemiBold,
-                        fontStyle: FontStyle.normal,
-                        fontSize: AppSize.height16,
-                        fontWeight: FontWeight.w600,
-                        color: Theme.of(context).colorScheme.tertiaryContainer,
-                      ),
-                    ),
-                ],
               ),
-            ),
+              const SizedBox(width: AppSize.width6),
+              if (isSelected)
+                Text(
+                  label,
+                  style: TextStyle(
+                    //fontFamily: FontFamily.mulishSemiBold,
+                    fontStyle: FontStyle.normal,
+                    fontSize: AppSize.height16,
+                    fontWeight: FontWeight.w600,
+                    color: Theme.of(context).colorScheme.tertiaryContainer,
+                  ),
+                ),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   void navigateToPage(int pageIndex) {
