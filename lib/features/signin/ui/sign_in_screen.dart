@@ -284,13 +284,13 @@ class SignInScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  AppImage.googleLogo,
+                  AppImage.facebookLogo,
                   height: AppSize.height22,
                   color: Theme.of(context).appBarTheme.titleTextStyle?.color,
                 ),
                 const SizedBox(width: AppSize.width6),
                 Text(
-                  AppString.google,
+                  AppString.facebook,
                   style: TextStyle(
                     //fontFamily: FontFamily.mulishMedium,
                     color: Theme.of(context).appBarTheme.titleTextStyle?.color,
