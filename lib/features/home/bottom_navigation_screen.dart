@@ -71,7 +71,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
             currentIndex == 0,
             AppIcons.homeFillIcon,
             AppIcons.homeIcon,
-            AppString.home,
+            AppString.companies,
             onTap: () {
               navigateToPage(0);
             },
