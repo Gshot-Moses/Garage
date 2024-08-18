@@ -2,6 +2,7 @@
 class AppString {
   static const String alreadyHaveAnAccount = 'Already have an account? ';
   static const String appointments = 'Appointments';
+  static const String companies = 'Companies';
   static const String confirmPassword = 'Confirm Password';
   static const String home = 'Home';
   static const String facebook = 'Facebook';
