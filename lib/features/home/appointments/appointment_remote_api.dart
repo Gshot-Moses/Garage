@@ -7,6 +7,6 @@ abstract class AppointmentRemoteApi extends ChopperService {
 
   static AppointmentRemoteApi create({ChopperClient? client}) => _$AppointmentRemoteApi(client);
 
-  @Get(path: "/api/appointments")
+  @Get(path: "/appointments")
   Future<Response> getAppointments();
 }

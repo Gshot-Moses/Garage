@@ -6,25 +6,7 @@ part of 'models.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) =>
-    LoginResponse(
-      username: json['username'] as String,
-      email: json['email'] as String,
-      accessToken: json['accessToken'] as String,
-      refreshToken: json['refreshToken'] as String,
-    );
-
-Map<String, dynamic> _$LoginResponseToJson(LoginResponse instance) =>
-    <String, dynamic>{
-      'username': instance.username,
-      'email': instance.email,
-      'accessToken': instance.accessToken,
-      'refreshToken': instance.refreshToken,
-    };
-
-GetCurrentUserResponse _$GetCurrentUserResponseFromJson(
-        Map<String, dynamic> json) =>
-    GetCurrentUserResponse(
+UserInfo _$UserInfoFromJson(Map<String, dynamic> json) => UserInfo(
       createdAt: json['CreatedAt'] as String,
       updatedAt: json['UpdatedAt'] as String,
       email: json['email'] as String,
@@ -34,9 +16,7 @@ GetCurrentUserResponse _$GetCurrentUserResponseFromJson(
       lastName: json['last_name'] as String,
     );
 
-Map<String, dynamic> _$GetCurrentUserResponseToJson(
-        GetCurrentUserResponse instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$UserInfoToJson(UserInfo instance) => <String, dynamic>{
       'CreatedAt': instance.createdAt,
       'email': instance.email,
       'external_id': instance.externalId,

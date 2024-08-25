@@ -62,8 +62,6 @@ class CompanyApiResponse {
   static fromJson(Map<String, dynamic> json) => _$CompanyApiResponseFromJson(json);
 
   static List<CompanyApiResponse> fromList(List<Map<String, dynamic>> values) {
-    print(values);
-    print(values[0]["address_line_1"]);
     return values.map((element) => _$CompanyApiResponseFromJson(element)).toList();
   }
 }

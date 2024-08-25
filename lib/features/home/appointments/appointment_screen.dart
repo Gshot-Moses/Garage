@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garage/config/app_image.dart';
 import 'package:garage/features/home/appointments/appointment_controller.dart';
-import 'package:garage/features/home/appointments/appointment_state.dart';
 import 'package:get/get.dart';
 import 'package:garage/config/app_size.dart';
 import 'package:garage/config/app_string.dart';
@@ -182,45 +181,46 @@ class AppointmentScreen extends StatelessWidget {
   Widget serviceOperationsList() {
     return Obx(() => Padding(
       padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-      child: !_appointmentController.state.isLoading ? ListView.builder(
-        itemCount: _appointmentController.state.appointments!.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
+      child: _appointmentController.state.isLoading ? const Center(child: CircularProgressIndicator()) :
+        !_appointmentController.state.hasError ? ListView.builder(
+          itemCount: _appointmentController.state.appointments!.length,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () {
 
-            },
-            child: Container(
-              padding: const EdgeInsets.only(top: AppSize.height10),
-              height: AppSize.height102,
-              width: AppSize.width102,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: AppColor.progressBarColor,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(AppImage.googleLogo,
-                      height: AppSize.height32, width: AppSize.width32),
-                  const SizedBox(height: AppSize.height16),
-                  Text(
-                    _appointmentController.state.appointments![index].createdAt,
-                    style: const TextStyle(
-                      // fontFamily: FontFamily.mulishSemiBold,
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w600,
-                      color: AppColor.secondaryColor,
-                      fontSize: AppSize.height14,
+              },
+              child: Container(
+                padding: const EdgeInsets.only(top: AppSize.height10),
+                height: AppSize.height102,
+                width: AppSize.width102,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: AppColor.progressBarColor,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(AppImage.googleLogo,
+                        height: AppSize.height32, width: AppSize.width32),
+                    const SizedBox(height: AppSize.height16),
+                    Text(
+                      _appointmentController.state.appointments![index].createdAt,
+                      style: const TextStyle(
+                        // fontFamily: FontFamily.mulishSemiBold,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w600,
+                        color: AppColor.secondaryColor,
+                        fontSize: AppSize.height14,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          );
-        },
-      ) : const Center(child: CircularProgressIndicator()),
-    ));
+            );
+          },
+        ) : const Center(child: Text("Error. Try again")),
+      ));
     // return Padding(
     //   padding: const EdgeInsets.only(left: 8.0, right: 8.0),
     //   child: ListView.builder(

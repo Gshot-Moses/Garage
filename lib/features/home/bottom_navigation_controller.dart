@@ -9,6 +9,6 @@ class BottomNavigationController extends GetxController {
   RxList<Widget> pageList = [
     CompanyListingScreen(),
     AppointmentScreen(),
-    const ProfileScreen()
+    ProfileScreen()
   ].obs;
 }

@@ -11,9 +11,9 @@ class ApiClient {
   static const String BASE_URL = "https://garage-floral-field-9662.fly.dev/api";
   late ChopperClient _client;
 
-  final String token;
+  ChopperClient get chopperClient => _client;
 
-  ApiClient({required this.token}) {
+  ApiClient() {
     createChopperClient();
   }
 
@@ -31,7 +31,8 @@ class ApiClient {
           CompanyRemoteApi.create(),
         ],
         interceptors: [
-          AuthorizationInterceptor(token: token),
+          HttpLoggingInterceptor()
+          // AuthorizationInterceptor(token: token),
         ],
         // converter: const JsonToTypeConverter(jsonConvertorMap: {
         //   CompanyApiResponse: CompanyApiResponse.fromJson,
@@ -50,7 +51,6 @@ class AuthorizationInterceptor implements Interceptor {
   @override
   FutureOr<Response<BodyType>> intercept<BodyType>(Chain<BodyType> chain) async {
     var request = applyHeader(chain.request, "Authorization", "Bearer $token");
-    print(request.headers);
     return chain.proceed(request);
   }
 }

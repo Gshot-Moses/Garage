@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:garage/features/home/user_profile/user_profile_controller.dart';
 import 'package:get/get.dart';
 import 'package:garage/config/app_size.dart';
 import 'package:garage/config/app_string.dart';
@@ -7,7 +8,9 @@ import 'package:garage/config/app_icons.dart';
 import 'package:garage/config/app_color.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  ProfileScreen({super.key});
+
+  final UserProfileController _controller = Get.put(UserProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +107,7 @@ class ProfileScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CustomText(
-                  "Hello Gshot",
+                  "Hello ${_controller.state.userInfo!.firstName}",
                   AppSize.height16,
                   Theme.of(context).appBarTheme.titleTextStyle!.color!,
                   // FontFamily.mulishMedium,

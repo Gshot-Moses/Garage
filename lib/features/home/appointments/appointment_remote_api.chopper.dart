@@ -19,7 +19,7 @@ final class _$AppointmentRemoteApi extends AppointmentRemoteApi {
 
   @override
   Future<Response<dynamic>> getAppointments() {
-    final Uri $url = Uri.parse('/api/appointments');
+    final Uri $url = Uri.parse('/appointments');
     final Request $request = Request(
       'GET',
       $url,

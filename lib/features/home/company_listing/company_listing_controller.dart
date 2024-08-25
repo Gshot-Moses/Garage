@@ -23,11 +23,11 @@ class CompanyListingController extends GetxController {
     try {
       var response = await _remoteApi.getCompanies();
       if (response.isSuccessful) {
-        var companies = CompanyApiResponse.fromList(jsonDecode(response.bodyString));
+        List<dynamic> json = jsonDecode(response.bodyString);
+        var companies = CompanyApiResponse.fromList(json.map((item) => item as Map<String, dynamic>).toList());
         _state.value = _state.value.copy(isLoading: false, companies: companies);
       } else {
         _state.value = _state.value.copy(isLoading: false, hasFailed: true);
-        print(response.error);
       }
     } catch (e) {
       _state.value = _state.value.copy(isLoading: false, hasFailed: true);

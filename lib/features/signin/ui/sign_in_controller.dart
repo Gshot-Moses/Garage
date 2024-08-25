@@ -1,3 +1,4 @@
+import 'package:chopper/chopper.dart' as chopper;
 import 'package:flutter/material.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:garage/common/local_storage.dart';
@@ -11,6 +12,8 @@ class SignInController extends GetxController {
 
   final SignInService _signInService = Get.find<SignInService>();
   final LocalStorage _cache = Get.find<LocalStorage>();
+
+  final chopper.ChopperClient _chopperClient = Get.find<chopper.ChopperClient>();
 
   RxBool isPasswordVisible = false.obs;
   RxBool isValid = false.obs;
@@ -48,21 +51,22 @@ class SignInController extends GetxController {
           callbackUrlScheme: "com.gshot.garage"
       );
       var token = Uri.parse(result).queryParameters['token'];
+
+      _chopperClient.interceptors.add(AuthorizationInterceptor(token: token!));
+
       userId = Uri.parse(result).queryParameters['userId'];
-      await _cache.saveAccessToken(token!);
+      await _cache.saveAccessToken(token);
       _state.value = _state.value.copy(accessToken: token);
     } catch(e) {
       _state.value = _state.value.copy(hasFailed: true);
     }
     if (!_state.value.hasFailed) {
       try {
-        var response = await _signInService.getUserInfo();
+        var response = await _signInService.getUserInfo(userId!);
         if (response.isSuccessful) {
-          print(response.bodyString);
           await _cache.storeUserInfo(response.bodyString);
           Get.to(const BottomNavigationScreen())?.then((value) => _state.value = _state.value.copy(isLoading: false));
         } else {
-          print(response.error);
           _state.value = _state.value.copy(isLoading: false, hasFailed: true);
         }
       } catch(e) {

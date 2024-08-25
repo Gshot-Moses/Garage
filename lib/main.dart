@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:garage/common/local_storage.dart';
 import 'package:garage/config/app_theme.dart';
@@ -19,7 +18,11 @@ void main() async {
   var localStorage = Get.put(LocalStorage(preferences: SharedPreferencesAsync()));
   var token = await localStorage.getAccessToken();
 
-  final ApiClient client = ApiClient(token: token ?? "");
+  final ApiClient client = ApiClient();
+  if (token != null) {
+    client.chopperClient.interceptors.add(AuthorizationInterceptor(token: token));
+  }
+  Get.put(client.chopperClient);
   Get.lazyPut(() => client.getChopperService<SignInService>());
   Get.lazyPut(() => client.getChopperService<SignUpService>());
   Get.lazyPut(() => client.getChopperService<CompanyRemoteApi>());

@@ -3,24 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'models.g.dart';
 
 @JsonSerializable()
-class LoginResponse {
-  final String username;
-  final String email;
-  final String accessToken;
-  final String refreshToken;
-
-  LoginResponse({
-    required this.username,
-    required this.email,
-    required this.accessToken,
-    required this.refreshToken
-  });
-
-  static fromJson(Map<String, dynamic> json) => _$LoginResponseFromJson(json);
-}
-
-@JsonSerializable()
-class GetCurrentUserResponse {
+class UserInfo {
 
   @JsonKey(name: "CreatedAt")
   final String createdAt;
@@ -43,7 +26,7 @@ class GetCurrentUserResponse {
   @JsonKey(name: "UpdatedAt")
   final String updatedAt;
 
-  GetCurrentUserResponse({
+  UserInfo({
     required this.createdAt,
     required this.updatedAt,
     required this.email,
@@ -53,5 +36,5 @@ class GetCurrentUserResponse {
     required this.lastName
   });
 
-  static fromJson(Map<String, dynamic> json) => _$GetCurrentUserResponseFromJson(json);
+  static fromJson(Map<String, dynamic> json) => _$UserInfoFromJson(json);
 }

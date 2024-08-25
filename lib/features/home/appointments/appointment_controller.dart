@@ -24,14 +24,16 @@ class AppointmentController extends GetxController {
 
   Future<void> getAppointments() async {
     _state.value = _state.value.copy(isLoading: true);
-    var response = await _apiService.getAppointments();
-    if (response.isSuccessful) {
-      print(response.bodyString);
-      List<dynamic> body = jsonDecode(response.bodyString);
-      final companies = GetAppointmentsApiResponse.fromList(body.cast<Map<String, dynamic>>());
-      _state.value = _state.value.copy(isLoading: false, appointments: companies);
-    } else {
-      print(response.error);
+    try {
+      var response = await _apiService.getAppointments();
+      if (response.isSuccessful) {
+        List<dynamic> body = jsonDecode(response.bodyString);
+        final appointments = GetAppointmentsApiResponse.fromList(body.cast<Map<String, dynamic>>());
+        _state.value = _state.value.copy(isLoading: false, appointments: appointments);
+      } else {
+        _state.value = _state.value.copy(isLoading: false, hasError: true);
+      }
+    } catch (e) {
       _state.value = _state.value.copy(isLoading: false, hasError: true);
     }
   }

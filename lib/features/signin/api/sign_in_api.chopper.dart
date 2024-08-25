@@ -31,8 +31,8 @@ final class _$SignInService extends SignInService {
   }
 
   @override
-  Future<Response<dynamic>> getUserInfo() {
-    final Uri $url = Uri.parse('/users/me');
+  Future<Response<dynamic>> getUserInfo(String id) {
+    final Uri $url = Uri.parse('/users/${id}');
     final Request $request = Request(
       'GET',
       $url,

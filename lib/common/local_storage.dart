@@ -9,6 +9,10 @@ class LocalStorage {
     await preferences.setString("user_info", json);
   }
 
+  Future<String?> getUserInfo() async {
+    return preferences.getString("user_info");
+  }
+
   Future<void> saveAccessToken(String accessToken) async {
     await preferences.setString("access_token", accessToken);
   }

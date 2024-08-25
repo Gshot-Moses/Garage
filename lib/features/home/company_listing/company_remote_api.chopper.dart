@@ -19,7 +19,7 @@ final class _$CompanyRemoteApi extends CompanyRemoteApi {
 
   @override
   Future<Response<dynamic>> getCompanies() {
-    final Uri $url = Uri.parse('/api/companies');
+    final Uri $url = Uri.parse('/companies');
     final Request $request = Request(
       'GET',
       $url,
