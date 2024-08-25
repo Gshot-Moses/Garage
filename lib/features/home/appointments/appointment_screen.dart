@@ -81,7 +81,7 @@ class AppointmentScreen extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    AppString.welcome,
+                    AppString.welcome.tr,
                     style: TextStyle(
                         // fontFamily: FontFamily.mulishMedium,
                         fontWeight: FontWeight.w500,
@@ -153,7 +153,7 @@ class AppointmentScreen extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            "Companies",
+            AppString.companies.tr,
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: AppSize.height18,
@@ -163,10 +163,10 @@ class AppointmentScreen extends StatelessWidget {
                 color: Theme.of(context).appBarTheme.titleTextStyle?.color),
           ),
           const Spacer(),
-          const Text(
-            AppString.seeAll,
+          Text(
+            AppString.seeAll.tr,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: AppSize.height14,
                 fontStyle: FontStyle.normal,
                 // fontFamily: FontFamily.mulishSemiBold,
@@ -319,7 +319,7 @@ class AppointmentScreen extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            AppString.serviceOperations,
+            AppString.serviceOperations.tr,
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: AppSize.height18,
@@ -329,10 +329,10 @@ class AppointmentScreen extends StatelessWidget {
                 color: Theme.of(context).appBarTheme.titleTextStyle?.color),
           ),
           const Spacer(),
-          const Text(
-            AppString.seeAll,
+          Text(
+            AppString.seeAll.tr,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: AppSize.height14,
                 fontStyle: FontStyle.normal,
                 // fontFamily: FontFamily.mulishSemiBold,

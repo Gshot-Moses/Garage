@@ -43,7 +43,7 @@ class CompanyListingScreen extends StatelessWidget {
                 title: Row(
                   children: [
                     Text(
-                      AppString.companies,
+                      AppString.companies.tr,
                       style: TextStyle(
                         // fontFamily: FontFamily.mulishBold,
                         fontSize: AppSize.height18,
@@ -188,7 +188,7 @@ class CompanyListingScreen extends StatelessWidget {
               ),
             );
           }
-        ) : const Center(child: Text("Error. Try again"),),
+        ) : const Center(child: Text("Error. Try again")),
     );
   }
 }

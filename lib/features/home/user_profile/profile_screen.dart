@@ -41,7 +41,7 @@ class ProfileScreen extends StatelessWidget {
             title: Padding(
               padding: const EdgeInsets.only(left: 4.0),
               child: Text(
-                "My profile",
+                AppString.profile.tr,
                 style: TextStyle(
                   // fontFamily: FontFamily.mulishBold,
                   fontSize: AppSize.height18,
@@ -125,7 +125,7 @@ class ProfileScreen extends StatelessWidget {
           ),
           const SizedBox(height: AppSize.height6),
           CustomText(
-              AppString.emailHintText.tr,
+              _controller.state.userInfo!.email,
               AppSize.height14,
               Theme.of(context).textTheme.titleMedium!.color!,
               // FontFamily.mulishRegular,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:garage/features/home/bottom_navigation_screen.dart';
 import 'package:get/get.dart';
 import 'package:email_validator/email_validator.dart';
@@ -119,7 +118,7 @@ class SignInScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Text(
-          AppString.signIn,
+          AppString.signIn.tr,
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: AppSize.height24,
@@ -128,7 +127,7 @@ class SignInScreen extends StatelessWidget {
         ),
         const SizedBox(height: AppSize.height6),
         Text(
-          AppString.pleaseEnterBelowDetail,
+          AppString.pleaseEnterBelowDetail.tr,
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: AppSize.height14,
@@ -143,7 +142,7 @@ class SignInScreen extends StatelessWidget {
   Widget emailField() {
     return CustomTextField(
       controller: _signInController.emailController,
-      hintText: AppString.emailHintText,
+      hintText: AppString.emailHintText.tr,
       contentPadding: const EdgeInsets.only(
         right: AppSize.width20,
         left: AppSize.width20,
@@ -155,7 +154,7 @@ class SignInScreen extends StatelessWidget {
       fontWeight: FontWeight.w500,
       validator: (value) {
         if (!EmailValidator.validate(value ?? "")) {
-          return AppString.pleaseEnterValidEmail;
+          return AppString.pleaseEnterValidEmail.tr;
         } else {
           return null;
         }
@@ -169,7 +168,7 @@ class SignInScreen extends StatelessWidget {
         Obx(
           () => CustomTextField(
             controller: _signInController.passwordController,
-            hintText: AppString.passwordHintText,
+            hintText: AppString.passwordHintText.tr,
             obscureText: !_signInController.isPasswordVisible.value,
             contentPadding: const EdgeInsets.only(
               right: AppSize.width20,
@@ -184,7 +183,7 @@ class SignInScreen extends StatelessWidget {
                 _signInController.togglePasswordVisibility,
             validator: (value) {
               if (value!.isEmpty) {
-                return AppString.pleaseEnterPassword;
+                return AppString.pleaseEnterPassword.tr;
               } else {
                 _signInController.isValid.value = true;
                 return null;
@@ -230,7 +229,7 @@ class SignInScreen extends StatelessWidget {
     return Align(
       alignment: Alignment.center,
       child: Text(
-        AppString.orLogInWith,
+        AppString.orLogInWith.tr,
         textAlign: TextAlign.center,
         style: TextStyle(
             fontSize: AppSize.height16,
@@ -268,7 +267,7 @@ class SignInScreen extends StatelessWidget {
                   ),
                   const SizedBox(width: AppSize.width6),
                   Text(
-                    AppString.google,
+                    AppString.google.tr,
                     style: TextStyle(
                       // fontFamily: FontFamily.mulishMedium,
                       color: Theme.of(context).appBarTheme.titleTextStyle?.color,
@@ -304,7 +303,7 @@ class SignInScreen extends StatelessWidget {
                 ),
                 const SizedBox(width: AppSize.width6),
                 Text(
-                  AppString.facebook,
+                  AppString.facebook.tr,
                   style: TextStyle(
                     //fontFamily: FontFamily.mulishMedium,
                     color: Theme.of(context).appBarTheme.titleTextStyle?.color,
@@ -332,7 +331,7 @@ class SignInScreen extends StatelessWidget {
               Get.off(const BottomNavigationScreen());
             }
           },
-          text: AppString.signIn,
+          text: AppString.signIn.tr,
           height: AppSize.height52,
           width: AppSize.width,
           buttonColor: _signInController.isValid.value
@@ -353,7 +352,7 @@ class SignInScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          AppLocalizations.of(context)!.already_have_an_account,
+          AppString.alreadyHaveAnAccount.tr,
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: AppSize.height14,
@@ -367,9 +366,9 @@ class SignInScreen extends StatelessWidget {
             Get.off(SignUpScreen())?.then(
                 (value) => FocusManager.instance.primaryFocus?.unfocus());
           },
-          child: const Text(
-            AppString.signUp,
-            style: TextStyle(
+          child: Text(
+            AppString.signUp.tr,
+            style: const TextStyle(
                 fontSize: AppSize.height14,
                 // fontFamily: FontFamily.mulishBold,
                 fontWeight: FontWeight.w700,

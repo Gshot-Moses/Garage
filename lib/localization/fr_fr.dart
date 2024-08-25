@@ -1,0 +1,28 @@
+import 'package:garage/config/app_string.dart';
+
+final Map<String, String> frFR = {
+  AppString.alreadyHaveAnAccount: "Vous avez deja un compte ?",
+  AppString.appointments: "Rendez-vous",
+  AppString.companies: "Garages",
+  AppString.confirmPassword: "Confirmer mot de passe",
+  AppString.home: "Accueil",
+  AppString.emailHintText: "exemple@gmail.com",
+  AppString.facebook: "Facebook",
+  AppString.google: "Google",
+  AppString.profile: "Mon Profil",
+  AppString.nameHintText: "Votre nom",
+  AppString.notMatch: "Pas de correspondance",
+  AppString.orLogInWith: "Ou",
+  AppString.signIn: "Connectez-vous",
+  AppString.signUp: "Creer un compte",
+  AppString.seeAll: "Voir tous",
+  AppString.serviceOperations: "Services",
+  AppString.pleaseEnterConfirmPassword: "Confirmez votre mot de passe",
+  AppString.pleaseEnterName: "Entrez votre nom",
+  AppString.pleaseEnterBelowDetail: "Enterz ces informations dessous",
+  AppString.pleaseEnterValidEmail: "Entrez une addresse valide",
+  AppString.passwordHintText: "Mot de passe",
+  AppString.pleaseEnterPassword: "Entrez votre mot de passe",
+  AppString.notHavingAnAccount: "Vous n'avez pas de compte ?",
+  AppString.welcome: "Bienvenu",
+};

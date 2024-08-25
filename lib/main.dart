@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:garage/common/local_storage.dart';
 import 'package:garage/config/app_theme.dart';
 import 'package:garage/features/home/appointments/appointment_remote_api.dart';
@@ -9,6 +8,7 @@ import 'package:garage/features/signin/api/sign_in_api.dart';
 import 'package:garage/features/signin/ui/sign_in_screen.dart';
 import 'package:garage/features/signup/api/sign_up_api.dart';
 import 'package:garage/common/remote_api.dart';
+import 'package:garage/localization/translations.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,8 +39,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
+      translationsKeys: AppTranslation.translationsKeys,
+      locale: const Locale("fr", "FR"),
       theme: AppTheme.light().themeData,
       home: token != null ? const BottomNavigationScreen() : SignInScreen(),
     );
@@ -57,7 +57,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
 
   @override
   Widget build(BuildContext context) {

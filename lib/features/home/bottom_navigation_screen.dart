@@ -24,7 +24,6 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   void initState() {
     super.initState();
 
-    // currentIndex = widget.initialIndex;
     pageController = PageController(initialPage: currentIndex);
   }
 
@@ -71,7 +70,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
             currentIndex == 0,
             AppIcons.homeFillIcon,
             AppIcons.homeIcon,
-            AppString.companies,
+            AppString.companies.tr,
             onTap: () {
               navigateToPage(0);
             },
@@ -80,7 +79,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
             currentIndex == 1,
             AppIcons.bookingFillIcon,
             AppIcons.bookingIcon,
-            AppString.appointments,
+            AppString.appointments.tr,
             onTap: () {
               navigateToPage(1);
             },
@@ -98,7 +97,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
             currentIndex == 2,
             AppIcons.profileFillIcon,
             AppIcons.profileIcon,
-            AppString.profile,
+            AppString.profile.tr,
             onTap: () {
               navigateToPage(2);
             },
