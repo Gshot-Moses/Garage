@@ -9,4 +9,7 @@ abstract class SignInService extends ChopperService {
 
   @Post(path: "/signin")
   Future<Response> login(@Body() Map<String, dynamic> data);
+
+  @Get(path: "/users/me")
+  Future<Response> getUserInfo();
 }

@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_auth/flutter_web_auth.dart';
+import 'package:garage/common/local_storage.dart';
+import 'package:garage/common/remote_api.dart';
+import 'package:garage/features/home/bottom_navigation_screen.dart';
+import 'package:garage/features/signin/api/sign_in_api.dart';
+import 'package:garage/features/signin/ui/sign_in_state.dart';
 import 'package:get/get.dart';
 
 class SignInController extends GetxController {
 
+  final SignInService _signInService = Get.find<SignInService>();
+  final LocalStorage _cache = Get.find<LocalStorage>();
+
   RxBool isPasswordVisible = false.obs;
   RxBool isValid = false.obs;
+  final Rx<SignInState> _state = SignInState().obs;
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  SignInState get state => _state.value;
 
   @override
   void onInit() {
@@ -25,5 +37,37 @@ class SignInController extends GetxController {
 
   void togglePasswordVisibility() {
     isPasswordVisible.toggle();
+  }
+
+  Future<void> onGoogleSignIn() async {
+    String? userId;
+    _state.value = _state.value.copy(isLoading: true);
+    try {
+      final result = await FlutterWebAuth.authenticate(
+          url: "https://garage-floral-field-9662.fly.dev/auth/mgoogle",
+          callbackUrlScheme: "com.gshot.garage"
+      );
+      var token = Uri.parse(result).queryParameters['token'];
+      userId = Uri.parse(result).queryParameters['userId'];
+      await _cache.saveAccessToken(token!);
+      _state.value = _state.value.copy(accessToken: token);
+    } catch(e) {
+      _state.value = _state.value.copy(hasFailed: true);
+    }
+    if (!_state.value.hasFailed) {
+      try {
+        var response = await _signInService.getUserInfo();
+        if (response.isSuccessful) {
+          print(response.bodyString);
+          await _cache.storeUserInfo(response.bodyString);
+          Get.to(const BottomNavigationScreen())?.then((value) => _state.value = _state.value.copy(isLoading: false));
+        } else {
+          print(response.error);
+          _state.value = _state.value.copy(isLoading: false, hasFailed: true);
+        }
+      } catch(e) {
+        _state.value = _state.value.copy(isLoading: false, hasFailed: true);
+      }
+    }
   }
 }

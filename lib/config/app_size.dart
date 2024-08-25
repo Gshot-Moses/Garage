@@ -19,6 +19,7 @@ class AppSize {
   static const double height20 = 20;
   static const double height22 = 22;
   static const double height24 = 24;
+  static const double height30 = 30;
   static const double height32 = 32;
   static const double height40 = 40;
   static const double height52 = 52;

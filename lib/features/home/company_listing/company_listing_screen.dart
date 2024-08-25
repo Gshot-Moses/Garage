@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garage/config/app_color.dart';
+import 'package:garage/config/app_image.dart';
 import 'package:garage/config/app_size.dart';
 import 'package:garage/config/app_string.dart';
 import 'package:garage/features/home/company_listing/company_listing_controller.dart';
@@ -77,12 +78,13 @@ class CompanyListingScreen extends StatelessWidget {
 
   Widget companyListView() {
     return Obx(
-      () => ListView.builder(
-          itemCount: _controller.state.length,
+      () => _controller.state.isLoading ? const Center(child: CircularProgressIndicator()) :
+        !_controller.state.hasFailed ? ListView.builder(
+          itemCount: _controller.state.companies.length,
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (BuildContext context, int index) {
-            var mData = _controller.state[index];
+            var mData = _controller.state.companies[index];
             return Container(
               width: Get.width,
               padding: const EdgeInsets.all(AppSize.height12),
@@ -110,7 +112,8 @@ class CompanyListingScreen extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(6),
                     child: Image.asset(
-                      mData.image!,
+                      //mData.image!,
+                      AppImage.googleLogo,
                       fit: BoxFit.fill,
                       height: AppSize.height80,
                       width: AppSize.height80,
@@ -122,7 +125,7 @@ class CompanyListingScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(mData.title!,
+                        Text(mData.name,
                             style: TextStyle(
                                 color: Theme.of(context)
                                     .appBarTheme
@@ -184,7 +187,8 @@ class CompanyListingScreen extends StatelessWidget {
                 ],
               ),
             );
-          }),
+          }
+        ) : const Center(child: Text("Error. Try again"),),
     );
   }
 }

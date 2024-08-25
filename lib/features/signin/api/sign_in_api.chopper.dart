@@ -29,4 +29,15 @@ final class _$SignInService extends SignInService {
     );
     return client.send<dynamic, dynamic>($request);
   }
+
+  @override
+  Future<Response<dynamic>> getUserInfo() {
+    final Uri $url = Uri.parse('/users/me');
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+    );
+    return client.send<dynamic, dynamic>($request);
+  }
 }

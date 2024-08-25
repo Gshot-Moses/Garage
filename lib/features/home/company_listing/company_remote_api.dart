@@ -7,6 +7,6 @@ abstract class CompanyRemoteApi extends ChopperService {
 
   static CompanyRemoteApi create({ChopperClient? client}) => _$CompanyRemoteApi(client);
 
-  @Get(path: "/companies")
+  @Get(path: "/api/companies")
   Future<Response> getCompanies();
 }

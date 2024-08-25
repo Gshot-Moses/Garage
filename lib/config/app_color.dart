@@ -19,4 +19,5 @@ class AppColor {
   static const progressBarColor = Color(0xFFE9E9EC);
   static const placeholderDarkMode = Color(0xFF949494);
   static const  textFieldBorderColor= Color(0xFFD0D0D0);
+  static const  logOutColor= Color(0xFFFF0000);
 }

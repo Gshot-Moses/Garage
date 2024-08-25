@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:garage/features/home/bottom_navigation_screen.dart';
 import 'package:get/get.dart';
 import 'package:email_validator/email_validator.dart';
@@ -16,51 +17,61 @@ class SignInScreen extends StatelessWidget {
     super.key,
   });
 
-  final SignInController signInController = Get.put(SignInController());
+  final SignInController _signInController = Get.put(SignInController());
 
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
-      body: Form(
-        key: loginFormKey,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              bgImage(context),
-              Padding(
-                padding: EdgeInsets.only(
-                  left: AppSize.width20,
-                  right: AppSize.width20,
-                  top: Get.height / 19,
+    var isLoadingChildren = [
+      signInText(context),
+      SizedBox(height: Get.height / 23),
+      emailField(),
+      SizedBox(height: Get.height / 43),
+      passwordField(),
+      SizedBox(height: Get.height / 22),
+      signInButton(context),
+      SizedBox(height: Get.height / 43),
+      const Align(child: CircularProgressIndicator())
+    ];
+    var notIsLoadingChildren = [...isLoadingChildren]..removeAt(isLoadingChildren.length - 1)..addAll(
+      [
+        onLoginWithText(context),
+        SizedBox(height: Get.height / 43),
+        googleFbLogin(context),
+        SizedBox(height: Get.height / 22),
+        notHavingAccountText(context),
+        SizedBox(height: Get.height / 30),
+      ]
+    );
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Theme.of(context).primaryColor,
+        body: Form(
+          key: loginFormKey,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                bgImage(context),
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: AppSize.width20,
+                    right: AppSize.width20,
+                    top: Get.height / 19,
+                  ),
+                  child: Obx(
+                      () => Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: _signInController.state.isLoading ? isLoadingChildren : notIsLoadingChildren
+                      ),
+                  ),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    signInText(context),
-                    SizedBox(height: Get.height / 23),
-                    emailField(),
-                    SizedBox(height: Get.height / 43),
-                    passwordField(),
-                    SizedBox(height: Get.height / 22),
-                    signInButton(context),
-                    SizedBox(height: Get.height / 43),
-                    onLoginWithText(context),
-                    SizedBox(height: Get.height / 43),
-                    googleFbLogin(context),
-                    SizedBox(height: Get.height / 22),
-                    notHavingAccountText(context),
-                    SizedBox(height: Get.height / 30),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
-    ));
+      )
+    );
   }
 
   Widget bgImage(BuildContext context) {
@@ -131,7 +142,7 @@ class SignInScreen extends StatelessWidget {
 
   Widget emailField() {
     return CustomTextField(
-      controller: signInController.emailController,
+      controller: _signInController.emailController,
       hintText: AppString.emailHintText,
       contentPadding: const EdgeInsets.only(
         right: AppSize.width20,
@@ -157,9 +168,9 @@ class SignInScreen extends StatelessWidget {
       children: [
         Obx(
           () => CustomTextField(
-            controller: signInController.passwordController,
+            controller: _signInController.passwordController,
             hintText: AppString.passwordHintText,
-            obscureText: !signInController.isPasswordVisible.value,
+            obscureText: !_signInController.isPasswordVisible.value,
             contentPadding: const EdgeInsets.only(
               right: AppSize.width20,
               left: AppSize.width20,
@@ -170,21 +181,21 @@ class SignInScreen extends StatelessWidget {
             //fontFamily: FontFamily.mulishMedium,
             fontWeight: FontWeight.w500,
             onTogglePasswordVisibility:
-                signInController.togglePasswordVisibility,
+                _signInController.togglePasswordVisibility,
             validator: (value) {
               if (value!.isEmpty) {
                 return AppString.pleaseEnterPassword;
               } else {
-                signInController.isValid.value = true;
+                _signInController.isValid.value = true;
                 return null;
               }
             },
             suffixIcon: GestureDetector(
               onTap: () {
-                signInController.togglePasswordVisibility();
+                _signInController.togglePasswordVisibility();
               },
               child: Image.asset(
-                signInController.isPasswordVisible.value
+                _signInController.isPasswordVisible.value
                     ? AppImage.openEye
                     : AppImage.passwordVisibility,
                 height: 0.1,
@@ -235,35 +246,38 @@ class SignInScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Expanded(
-          child: Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.symmetric(
-              vertical: AppSize.height18,
-            ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(AppSize.height12),
-              border: Border.all(
-                color: Theme.of(context).dividerColor,
+          child: GestureDetector(
+            onTap: () { _signInController.onGoogleSignIn(); },
+            child: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(
+                vertical: AppSize.height18,
               ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  AppImage.googleLogo,
-                  height: AppSize.height20,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(AppSize.height12),
+                border: Border.all(
+                  color: Theme.of(context).dividerColor,
                 ),
-                const SizedBox(width: AppSize.width6),
-                Text(
-                  AppString.google,
-                  style: TextStyle(
-                    // fontFamily: FontFamily.mulishMedium,
-                    color: Theme.of(context).appBarTheme.titleTextStyle?.color,
-                    fontWeight: FontWeight.w500,
-                    fontSize: AppSize.height15,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    AppImage.googleLogo,
+                    height: AppSize.height20,
                   ),
-                ),
-              ],
+                  const SizedBox(width: AppSize.width6),
+                  Text(
+                    AppString.google,
+                    style: TextStyle(
+                      // fontFamily: FontFamily.mulishMedium,
+                      color: Theme.of(context).appBarTheme.titleTextStyle?.color,
+                      fontWeight: FontWeight.w500,
+                      fontSize: AppSize.height15,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -312,8 +326,8 @@ class SignInScreen extends StatelessWidget {
           onTap: () async {
             if (loginFormKey.currentState!.validate()) {
               Future.delayed(const Duration(milliseconds: 500), () {
-                signInController.emailController.clear();
-                signInController.passwordController.clear();
+                _signInController.emailController.clear();
+                _signInController.passwordController.clear();
               });
               Get.off(const BottomNavigationScreen());
             }
@@ -321,10 +335,10 @@ class SignInScreen extends StatelessWidget {
           text: AppString.signIn,
           height: AppSize.height52,
           width: AppSize.width,
-          buttonColor: signInController.isValid.value
+          buttonColor: _signInController.isValid.value
               ? AppColor.primaryColorLightMode
               : Theme.of(context).tabBarTheme.labelColor,
-          borderColor: signInController.isValid.value
+          borderColor: _signInController.isValid.value
               ? AppColor.primaryColorLightMode
               : Theme.of(context).tabBarTheme.labelColor,
           //fontFamily: FontFamily.mulishRegular,
@@ -339,7 +353,7 @@ class SignInScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          AppString.notHavingAnAccount,
+          AppLocalizations.of(context)!.already_have_an_account,
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: AppSize.height14,
