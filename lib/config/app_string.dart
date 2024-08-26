@@ -24,4 +24,6 @@ class AppString {
   static const String pleaseEnterPassword = "Please enter password";
   static const String notHavingAnAccount = 'Don’t have an account? ';
   static const String welcome = 'Welcome';
+  static const String error = 'We encountered an error';
+  static const String retry = 'Retry';
 }

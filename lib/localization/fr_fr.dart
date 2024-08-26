@@ -25,4 +25,6 @@ final Map<String, String> frFR = {
   AppString.pleaseEnterPassword: "Entrez votre mot de passe",
   AppString.notHavingAnAccount: "Vous n'avez pas de compte ?",
   AppString.welcome: "Bienvenu",
+  AppString.error: "Erreur. Veuillez reessayer",
+  AppString.retry: "Reessayez"
 };

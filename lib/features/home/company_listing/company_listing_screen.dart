@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:garage/components/retry_widget.dart';
 import 'package:garage/config/app_color.dart';
 import 'package:garage/config/app_image.dart';
 import 'package:garage/config/app_size.dart';
@@ -188,7 +189,7 @@ class CompanyListingScreen extends StatelessWidget {
               ),
             );
           }
-        ) : const Center(child: Text("Error. Try again")),
+        ) : const RetryWidget(),
     );
   }
 }

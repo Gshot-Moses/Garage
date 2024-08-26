@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:garage/components/retry_widget.dart';
 import 'package:garage/config/app_image.dart';
 import 'package:garage/features/home/appointments/appointment_controller.dart';
 import 'package:get/get.dart';
@@ -15,11 +16,52 @@ class AppointmentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Theme.of(context).primaryColor,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(kToolbarHeight),
+          child: Container(
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Theme.of(context).appBarTheme.shadowColor!,
+                  spreadRadius: AppSize.height0,
+                  blurRadius: AppSize.height14,
+                  offset: const Offset(
+                    AppSize.height0,
+                    AppSize.height4,
+                  ),
+                ),
+              ],
+            ),
+            child: AppBar(
+              scrolledUnderElevation: 0.0,
+              shadowColor: Theme.of(context).appBarTheme.shadowColor,
+              backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+              centerTitle: false,
+              automaticallyImplyLeading: false,
+              title: Row(
+                children: [
+                  Text(
+                    AppString.appointments.tr,
+                    style: TextStyle(
+                      // fontFamily: FontFamily.mulishBold,
+                      fontSize: AppSize.height18,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w700,
+                      color:
+                      Theme.of(context).appBarTheme.titleTextStyle?.color,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
-              buildAppbar(context),
+              //buildAppbar(context),
               const SizedBox(height: AppSize.height24),
               // buildPagerView(),
               // const SizedBox(height: AppSize.height8),
@@ -40,24 +82,6 @@ class AppointmentScreen extends StatelessWidget {
               SizedBox(height: 100, child: serviceOperationsList()),
               const SizedBox(height: AppSize.height40),
               companiesText(context),
-              // const SizedBox(height: AppSize.height22),
-              // popularServiceData(),
-              // const SizedBox(height: AppSize.height40),
-              // spaForWomenText(),
-              // const SizedBox(height: AppSize.height22),
-              // spaForWomenData(),
-              // const SizedBox(height: AppSize.height40),
-              // salonForKidsManText(),
-              // const SizedBox(height: AppSize.height22),
-              // salonForKidsManData(),
-              // const SizedBox(height: AppSize.height40),
-              // acRepairText(),
-              // const SizedBox(height: AppSize.height22),
-              // acRepairData(),
-              // const SizedBox(height: AppSize.height40),
-              // quickHomeRepairText(),
-              // const SizedBox(height: AppSize.height14),
-              // tapRepairData(),
             ],
           ),
         ),
@@ -219,7 +243,7 @@ class AppointmentScreen extends StatelessWidget {
               ),
             );
           },
-        ) : const Center(child: Text("Error. Try again")),
+        ) : const RetryWidget(),
       ));
     // return Padding(
     //   padding: const EdgeInsets.only(left: 8.0, right: 8.0),
