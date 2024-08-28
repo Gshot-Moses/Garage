@@ -33,4 +33,8 @@ class CompanyListingController extends GetxController {
       _state.value = _state.value.copy(isLoading: false, hasFailed: true);
     }
   }
+
+  void onRetry() {
+    getCompanies();
+  }
 }

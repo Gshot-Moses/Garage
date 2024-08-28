@@ -7,7 +7,10 @@ import 'package:garage/config/app_size.dart';
 import 'package:get/get.dart';
 
 class RetryWidget extends StatelessWidget {
-  const RetryWidget({super.key});
+
+  final VoidCallback onRetry;
+
+  const RetryWidget({required this.onRetry, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +20,7 @@ class RetryWidget extends StatelessWidget {
           CustomText(AppString.error.tr, 14.0, Theme.of(context).appBarTheme.titleTextStyle!.color!, FontWeight.w500),
           const SizedBox(height: AppSize.height10),
           CustomButton(
+            onTap: onRetry,
             text: AppString.retry.tr,
             textColor: AppColor.whiteColor,
             buttonColor: AppColor.primaryColorLightMode,

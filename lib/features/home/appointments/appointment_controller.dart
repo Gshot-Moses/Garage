@@ -37,4 +37,8 @@ class AppointmentController extends GetxController {
       _state.value = _state.value.copy(isLoading: false, hasError: true);
     }
   }
+
+  void onRetry() {
+    getAppointments();
+  }
 }

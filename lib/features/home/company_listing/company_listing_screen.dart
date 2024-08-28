@@ -114,7 +114,7 @@ class CompanyListingScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(6),
                     child: Image.asset(
                       //mData.image!,
-                      AppImage.googleLogo,
+                      AppImage.carLogo,
                       fit: BoxFit.fill,
                       height: AppSize.height80,
                       width: AppSize.height80,
@@ -139,7 +139,8 @@ class CompanyListingScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("City",
+                            Text(
+                                mData.state,
                                 style: TextStyle(
                                     color: Theme.of(context)
                                         .appBarTheme
@@ -176,12 +177,13 @@ class CompanyListingScreen extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(height: AppSize.height16),
-                        const Text("Write a review",
-                            style: TextStyle(
-                                color: AppColor.primaryColorLightMode,
-                                // fontFamily: FontFamily.mulishMedium,
-                                fontWeight: FontWeight.w600,
-                                fontSize: AppSize.height12)),
+                        Text(
+                          mData.country,
+                          style: const TextStyle(
+                            color: AppColor.primaryColorLightMode,
+                            // fontFamily: FontFamily.mulishMedium,
+                            fontWeight: FontWeight.w600,
+                            fontSize: AppSize.height12)),
                       ],
                     ),
                   )
@@ -189,7 +191,7 @@ class CompanyListingScreen extends StatelessWidget {
               ),
             );
           }
-        ) : const RetryWidget(),
+        ) : RetryWidget(onRetry: _controller.onRetry),
     );
   }
 }
