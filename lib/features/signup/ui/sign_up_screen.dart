@@ -123,7 +123,7 @@ class SignUpScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Text(
-          AppString.signUp,
+          AppString.signUp.tr,
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: AppSize.height24,
@@ -136,7 +136,7 @@ class SignUpScreen extends StatelessWidget {
         ),
         const SizedBox(height: AppSize.height6),
         Text(
-          AppString.pleaseEnterBelowDetail,
+          AppString.pleaseEnterBelowDetail.tr,
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: AppSize.height14,
@@ -156,7 +156,7 @@ class SignUpScreen extends StatelessWidget {
   Widget nameField() {
     return CustomTextField(
       controller: signUpController.nameController,
-      hintText: AppString.nameHintText,
+      hintText: AppString.nameHintText.tr,
       // fontFamily: FontFamily.mulishMedium,
       fontSize: AppSize.height14,
       fontWeight: FontWeight.w500,
@@ -169,7 +169,7 @@ class SignUpScreen extends StatelessWidget {
       ),
       validator: (value) {
         if (value!.isEmpty) {
-          return AppString.pleaseEnterName;
+          return AppString.pleaseEnterName.tr;
         } else {
           return null;
         }
@@ -180,7 +180,7 @@ class SignUpScreen extends StatelessWidget {
   Widget emailField() {
     return CustomTextField(
       controller: signUpController.emailController,
-      hintText: AppString.emailHintText,
+      hintText: AppString.emailHintText.tr,
       contentPadding: const EdgeInsets.only(
         right: AppSize.width20,
         left: AppSize.width20,
@@ -193,7 +193,7 @@ class SignUpScreen extends StatelessWidget {
       color: AppColor.placeholderDarkMode,
       validator: (value) {
         if (!EmailValidator.validate(value ?? "")) {
-          return AppString.pleaseEnterValidEmail;
+          return AppString.pleaseEnterValidEmail.tr;
         } else {
           return null;
         }
@@ -208,7 +208,7 @@ class SignUpScreen extends StatelessWidget {
               () =>
               CustomTextField(
                 controller: signUpController.passwordController,
-                hintText: AppString.passwordHintText,
+                hintText: AppString.passwordHintText.tr,
                 obscureText: !signUpController.isPasswordVisible.value,
                 contentPadding: const EdgeInsets.only(
                   right: AppSize.width20,
@@ -224,7 +224,7 @@ class SignUpScreen extends StatelessWidget {
                 signUpController.togglePasswordVisibility,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return AppString.pleaseEnterPassword;
+                    return AppString.pleaseEnterPassword.tr;
                   } else {
                     return null;
                   }
@@ -253,7 +253,7 @@ class SignUpScreen extends StatelessWidget {
               () =>
               CustomTextField(
                 controller: signUpController.confirmPasswordController,
-                hintText: AppString.confirmPassword,
+                hintText: AppString.confirmPassword.tr,
                 obscureText: !signUpController.isConfirmPasswordValid.value,
                 contentPadding: const EdgeInsets.only(
                   right: AppSize.width20,
@@ -268,9 +268,9 @@ class SignUpScreen extends StatelessWidget {
                 onTogglePasswordVisibility:
                 signUpController.togglePasswordVisibility2,
                 validator: (val) {
-                  if (val!.isEmpty) return AppString.pleaseEnterConfirmPassword;
+                  if (val!.isEmpty) return AppString.pleaseEnterConfirmPassword.tr;
                   if (val != signUpController.passwordController.text) {
-                    return AppString.notMatch;
+                    return AppString.notMatch.tr;
                   }
                   return null;
                 },
@@ -300,7 +300,7 @@ class SignUpScreen extends StatelessWidget {
 
                 }
               },
-              text: AppString.signUp,
+              text: AppString.signUp.tr,
               height: AppSize.height52,
               width: AppSize.width,
               buttonColor: signUpController.isValid.value
@@ -327,7 +327,7 @@ class SignUpScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          AppString.alreadyHaveAnAccount,
+          AppString.alreadyHaveAnAccount.tr,
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: AppSize.height14,
@@ -343,10 +343,10 @@ class SignUpScreen extends StatelessWidget {
             Get.off(SignInScreen())?.then(
                     (value) => FocusManager.instance.primaryFocus?.unfocus());
           },
-          child: const Text(
-            AppString.signIn,
+          child: Text(
+            AppString.signIn.tr,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: AppSize.height14,
                 // fontFamily: FontFamily.mulishBold,
                 fontWeight: FontWeight.w500,
