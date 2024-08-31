@@ -65,6 +65,7 @@ class SignInController extends GetxController {
         var response = await _signInService.getUserInfo(userId!);
         if (response.isSuccessful) {
           await _cache.storeUserInfo(response.bodyString);
+          _state.value = _state.value.copy(isLoading: false);
           Get.to(const BottomNavigationScreen())?.then((value) => _state.value = _state.value.copy(isLoading: false));
         } else {
           _state.value = _state.value.copy(isLoading: false, hasFailed: true);

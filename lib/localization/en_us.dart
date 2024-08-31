@@ -26,5 +26,6 @@ final Map<String, String> enUS = {
   AppString.notHavingAnAccount: AppString.notHavingAnAccount,
   AppString.welcome: AppString.welcome,
   AppString.error: AppString.error,
-  AppString.retry: AppString.retry
+  AppString.retry: AppString.retry,
+  AppString.logout: AppString.logout
 };

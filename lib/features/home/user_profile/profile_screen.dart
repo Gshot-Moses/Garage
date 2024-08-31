@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:garage/common/local_storage.dart';
 import 'package:garage/features/home/user_profile/user_profile_controller.dart';
+import 'package:garage/features/signin/ui/sign_in_screen.dart';
 import 'package:get/get.dart';
 import 'package:garage/config/app_size.dart';
 import 'package:garage/config/app_string.dart';
@@ -11,6 +13,7 @@ class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
 
   final UserProfileController _controller = Get.put(UserProfileController());
+  final LocalStorage _localStorage = Get.find<LocalStorage>();
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +73,10 @@ class ProfileScreen extends StatelessWidget {
               // const SizedBox(height: AppSize.height16),
               // settingCard(context),
               const SizedBox(height: AppSize.height30),
-              logOutText(context),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: logOutText(context),
+              ),
               const SizedBox(height: AppSize.height30),
             ],
           ),
@@ -107,7 +113,7 @@ class ProfileScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CustomText(
-                  "Hello ${_controller.state.userInfo!.firstName}",
+                  "Bonjour ${_controller.state.userInfo!.firstName}",
                   AppSize.height16,
                   Theme.of(context).appBarTheme.titleTextStyle!.color!,
                   // FontFamily.mulishMedium,
@@ -137,12 +143,13 @@ class ProfileScreen extends StatelessWidget {
 
   logOutText(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        // logOutBottomSheet(context);
+      onTap: () async {
+        await _localStorage.clearSession();
+        Get.offAll(SignInScreen());
       },
-      child: const Center(
-        child: Text("Logout",
-            style: TextStyle(
+      child: Center(
+        child: Text(AppString.logout.tr,
+            style: const TextStyle(
                 color: AppColor.logOutColor,
                 // fontFamily: FontFamily.mulishMedium,
                 fontWeight: FontWeight.w500,

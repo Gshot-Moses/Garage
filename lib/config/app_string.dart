@@ -26,4 +26,5 @@ class AppString {
   static const String welcome = 'Welcome';
   static const String error = 'We encountered an error';
   static const String retry = 'Retry';
+  static const String logout = 'Logout';
 }

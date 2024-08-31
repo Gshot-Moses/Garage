@@ -20,4 +20,9 @@ class LocalStorage {
   Future<String?> getAccessToken() async {
     return await preferences.getString("access_token");
   }
+
+  Future<void> clearSession() async {
+    await preferences.remove("user_info");
+    await preferences.remove("access_token");
+  }
 }
