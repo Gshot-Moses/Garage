@@ -299,7 +299,7 @@ class SignInScreen extends StatelessWidget {
                 Image.asset(
                   AppImage.facebookLogo,
                   height: AppSize.height22,
-                  color: Theme.of(context).appBarTheme.titleTextStyle?.color,
+                  // color: Theme.of(context).appBarTheme.titleTextStyle?.color,
                 ),
                 const SizedBox(width: AppSize.width6),
                 Text(
