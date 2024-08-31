@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:garage/config/app_size.dart';
 import 'package:garage/config/app_string.dart';
 import 'package:garage/config/app_color.dart';
+import 'package:timeline_tile/timeline_tile.dart';
 
 class AppointmentScreen extends StatelessWidget {
   AppointmentScreen({super.key});
@@ -64,7 +65,7 @@ class AppointmentScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: AppSize.height20),
-              serviceOperationsList(),
+              appointmentList(),
             ],
           )
         ),
@@ -72,7 +73,7 @@ class AppointmentScreen extends StatelessWidget {
     );
   }
 
-  Widget serviceOperationsList() {
+  Widget appointmentList() {
     return Obx(() => Padding(
       padding: const EdgeInsets.only(left: 8.0, right: 8.0),
       child: _appointmentController.state.isLoading ? const Center(child: CircularProgressIndicator()) :
@@ -84,36 +85,57 @@ class AppointmentScreen extends StatelessWidget {
               onTap: () {
 
               },
-              child: Container(
-                padding: const EdgeInsets.only(top: AppSize.height10),
-                height: AppSize.height102,
-                width: AppSize.width102,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: AppColor.progressBarColor,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(AppImage.googleLogo,
-                        height: AppSize.height32, width: AppSize.width32),
-                    const SizedBox(height: AppSize.height16),
-                    Text(
-                      _appointmentController.state.appointments![index].createdAt,
-                      style: const TextStyle(
-                        // fontFamily: FontFamily.mulishSemiBold,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w600,
-                        color: AppColor.secondaryColor,
-                        fontSize: AppSize.height14,
-                      ),
-                    ),
-                  ],
-                ),
+              child: TimelineTile(
+                isFirst: index == 0,
+                isLast: index == _appointmentController.state.appointments!.length,
+                endChild: _appointmentTile(context),
               ),
             );
           },
         ) : RetryWidget(onRetry: _appointmentController.onRetry),
       ));
+  }
+
+  Widget _appointmentTile(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Theme.of(context).primaryColorLight, width: 2),
+        borderRadius: BorderRadius.circular(5)
+      ),
+      child: Card(
+        margin: EdgeInsets.zero,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+          child: Column(
+            children: [
+              const Text(
+                "Company Name", 
+                style: TextStyle(fontWeight: FontWeight.w300),
+              ),
+              const SizedBox(height: 5),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Service Operation",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w200,
+                      color: Theme.of(context).textTheme.titleMedium!.color!,
+                    ),
+                  ),
+                  Text(
+                    "Due: 21-10-2024",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      color: Theme.of(context).textTheme.titleMedium!.color!,
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
