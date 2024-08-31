@@ -63,6 +63,7 @@ class AppointmentScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: AppSize.height20),
               serviceOperationsList(),
             ],
           )
