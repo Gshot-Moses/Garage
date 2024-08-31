@@ -25,8 +25,8 @@ void main() async {
   Get.put(client.chopperClient);
   Get.lazyPut(() => client.getChopperService<SignInService>());
   Get.lazyPut(() => client.getChopperService<SignUpService>());
-  Get.lazyPut(() => client.getChopperService<CompanyRemoteApi>());
-  Get.lazyPut(() => client.getChopperService<AppointmentRemoteApi>());
+  Get.lazyPut(() => client.getChopperService<CompanyRemoteApi>(), fenix: true);
+  Get.lazyPut(() => client.getChopperService<AppointmentRemoteApi>(), fenix: true);
 
   runApp(MyApp(token: token));
 }
