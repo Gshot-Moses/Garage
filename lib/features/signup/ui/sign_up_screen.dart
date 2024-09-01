@@ -25,10 +25,10 @@ class SignUpScreen extends StatelessWidget {
     return SafeArea(
       child: ConditionalWillPopScope(
         onWillPop: () async {
-          Navigator.pop(context);
+          Get.offAll(SignInScreen());
           return false;
         },
-        shouldAddCallback: false,
+        shouldAddCallback: true,
         child: Scaffold(
           backgroundColor: Theme.of(context).primaryColor,
           body: SingleChildScrollView(
