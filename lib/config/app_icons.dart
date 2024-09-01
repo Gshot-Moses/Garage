@@ -7,4 +7,5 @@ class AppIcons {
   static const homeIcon = "asset/icons/home_icon.png";
   static const profileIcon = "asset/icons/profile_icon.png";
   static const profileFillIcon = "asset/icons/fill_profile_icon.png";
+  static const cancel = "asset/icons/cancel.png";
 }

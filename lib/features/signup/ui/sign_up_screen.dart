@@ -1,6 +1,7 @@
 import 'package:cupertino_will_pop_scope/cupertino_will_pop_scope.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:garage/config/app_icons.dart';
 import 'package:garage/features/signin/ui/sign_in_screen.dart';
 import 'package:garage/features/signup/ui/sign_up_controller.dart';
 import 'package:get/get.dart';
@@ -81,30 +82,20 @@ class SignUpScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          // Padding(
-          //   padding: const EdgeInsets.only(
-          //       right: AppSize.height20, bottom: AppSize.height10),
-          //   child: Align(
-          //     alignment: Alignment.topRight,
-          //     child: GestureDetector(
-          //         onTap: () {
-          //           if (status == "true") {
-          //             Get.offAll(const BottomScreen(
-          //               initialIndex: 0,
-          //             ));
-          //           } else if (status == "false") {
-          //             Navigator.of(context).pop();
-          //             Navigator.of(context).pop();
-          //           } else if (status == "onBoarding") {
-          //             Get.offAll(const BottomScreen(
-          //               initialIndex: 0,
-          //             ));
-          //           }
-          //         },
-          //         child: Image.asset(AppImage.cancelButton,
-          //             height: AppSize.height13)),
-          //   ),
-          // ),
+          Padding(
+            padding: const EdgeInsets.only(
+                right: AppSize.height20, bottom: AppSize.height10),
+            child: Align(
+              alignment: Alignment.topRight,
+              child: GestureDetector(
+                  onTap: () {
+                    Get.offAll(SignInScreen());
+                  },
+                  child: Image.asset(
+                      AppIcons.cancel,
+                      height: AppSize.height13)),
+            ),
+          ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Image.asset(
