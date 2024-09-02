@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:garage/components/circular_loading_indicator.dart';
 import 'package:garage/components/retry_widget.dart';
 import 'package:garage/config/app_image.dart';
 import 'package:garage/features/home/appointments/appointment_controller.dart';
 import 'package:get/get.dart';
 import 'package:garage/config/app_size.dart';
 import 'package:garage/config/app_string.dart';
-import 'package:garage/config/app_color.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 class AppointmentScreen extends StatelessWidget {
@@ -76,7 +76,7 @@ class AppointmentScreen extends StatelessWidget {
   Widget appointmentList() {
     return Obx(() => Padding(
       padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-      child: _appointmentController.state.isLoading ? const Center(child: CircularProgressIndicator()) :
+      child: _appointmentController.state.isLoading ? const Center(child: CircularLoadingIndicator()) :
         !_appointmentController.state.hasError ? ListView.builder(
           shrinkWrap: true,
           itemCount: _appointmentController.state.appointments!.length,
@@ -86,9 +86,20 @@ class AppointmentScreen extends StatelessWidget {
 
               },
               child: TimelineTile(
-                isFirst: index == 0,
-                isLast: index == _appointmentController.state.appointments!.length,
-                endChild: _appointmentTile(context),
+                  isFirst: index == 0,
+                  isLast: index == _appointmentController.state.appointments!.length - 1,
+                  indicatorStyle: const IndicatorStyle(
+                      width: 15,
+                      height: 15,
+                      padding: EdgeInsets.only(left: 3, right: 5)
+                  ),
+                  beforeLineStyle: const LineStyle(
+                    thickness: 2
+                  ),
+                  endChild: Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: _appointmentTile(context),
+                  )
               ),
             );
           },
@@ -98,33 +109,48 @@ class AppointmentScreen extends StatelessWidget {
 
   Widget _appointmentTile(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(top: 5, bottom: 5),
       decoration: BoxDecoration(
-        border: Border.all(color: Theme.of(context).primaryColorLight, width: 2),
-        borderRadius: BorderRadius.circular(5)
+        border: Border.all(color: Theme.of(context).appBarTheme.titleTextStyle!.color!.withAlpha(145), width: 1),
+        borderRadius: BorderRadius.circular(5),
       ),
       child: Card(
+        color: Colors.white,
         margin: EdgeInsets.zero,
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 5),
           child: Column(
             children: [
-              const Text(
-                "Company Name", 
-                style: TextStyle(fontWeight: FontWeight.w300),
+              Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.asset(
+                      AppImage.carLogo,
+                      height: 24,
+                      width: 24,
+                    ),
+                  ),
+                  const SizedBox(width: 5),
+                  const Text(
+                    "Landry et Fils",
+                    style: TextStyle(fontWeight: FontWeight.w300),
+                  ),
+                ],
               ),
               const SizedBox(height: 5),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Service Operation",
+                    "Vidange",
                     style: TextStyle(
-                      fontWeight: FontWeight.w200,
+                      fontWeight: FontWeight.w300,
                       color: Theme.of(context).textTheme.titleMedium!.color!,
                     ),
                   ),
                   Text(
-                    "Due: 21-10-2024",
+                    "Date: 21-10-2024",
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
                       color: Theme.of(context).textTheme.titleMedium!.color!,

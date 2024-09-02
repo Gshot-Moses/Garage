@@ -19,7 +19,13 @@ class AppointmentController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getAppointments();
+    var appointments = [
+      GetAppointmentsApiResponse(id: "2", updatedAt: "", createdAt: "", customerId: "", locationId: "", serviceId: ""),
+      GetAppointmentsApiResponse(id: "2", updatedAt: "", createdAt: "", customerId: "", locationId: "", serviceId: ""),
+      GetAppointmentsApiResponse(id: "2", updatedAt: "", createdAt: "", customerId: "", locationId: "", serviceId: ""),
+    ];
+    _state.value = _state.value.copy(appointments: appointments);
+    // getAppointments();
   }
 
   Future<void> getAppointments() async {
