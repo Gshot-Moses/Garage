@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:garage/components/circular_loading_indicator.dart';
 import 'package:garage/components/retry_widget.dart';
 import 'package:garage/config/app_color.dart';
 import 'package:garage/config/app_image.dart';
@@ -79,7 +80,7 @@ class CompanyListingScreen extends StatelessWidget {
 
   Widget companyListView() {
     return Obx(
-      () => _controller.state.isLoading ? const Center(child: CircularProgressIndicator()) :
+      () => _controller.state.isLoading ? const Center(child: CircularLoadingIndicator()) :
         !_controller.state.hasFailed ? ListView.builder(
           itemCount: _controller.state.companies.length,
           shrinkWrap: true,
