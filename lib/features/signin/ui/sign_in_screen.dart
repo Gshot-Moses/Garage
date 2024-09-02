@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:garage/components/circular_loading_indicator.dart';
 import 'package:garage/features/home/bottom_navigation_screen.dart';
 import 'package:get/get.dart';
 import 'package:email_validator/email_validator.dart';
@@ -30,8 +31,8 @@ class SignInScreen extends StatelessWidget {
       passwordField(),
       SizedBox(height: Get.height / 22),
       signInButton(context),
-      SizedBox(height: Get.height / 43),
-      const Align(child: CircularProgressIndicator())
+      const SizedBox(height: AppSize.height30),
+      const Align(child: CircularLoadingIndicator())
     ];
     var notIsLoadingChildren = [...isLoadingChildren]..removeAt(isLoadingChildren.length - 1)..addAll(
       [

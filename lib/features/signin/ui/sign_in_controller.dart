@@ -58,7 +58,7 @@ class SignInController extends GetxController {
       await _cache.saveAccessToken(token);
       _state.value = _state.value.copy(accessToken: token);
     } catch(e) {
-      _state.value = _state.value.copy(hasFailed: true);
+      _state.value = _state.value.copy(hasFailed: true, isLoading: false);
     }
     if (!_state.value.hasFailed) {
       try {
