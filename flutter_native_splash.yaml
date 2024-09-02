@@ -1,0 +1,11 @@
+flutter_native_splash:
+  color: "#42a5f5"
+  image: "asset/images/car_logo.png"
+
+  android_12:
+    color: "#42a5f5"
+    image: "asset/images/car_logo.png"
+
+  android: true
+  ios: true
+  web: false
